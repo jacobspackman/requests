@@ -75,7 +75,7 @@ const ohMy = () => {
             let newP = document.createElement('p')
             newP.textContent = `${result.data[i]}`
             document.body.appendChild(newP)
-            console.log(result[i])
+            console.log(result.data[i])
         }
         console.log(result.data)
     })
@@ -186,4 +186,21 @@ queryButton.addEventListener('click', queryTest)
     Based on what we did earlier to display this type of data, write code that will display the response in your HTML document. 
 */
 
-// CODE HERE 
+const createFood = () => {
+    let foodInput = document.querySelector('input')
+    let body = {
+        newFood: `${foodInput.value}`
+    }
+    axios.post('http://localhost:3000/food', body).then(result => {
+        // for (let i=0; i<result.data.length; i++){
+        //     let foodListItem = document.createElement('p')
+        //     foodListItem.textContent(`${result.data.newFood[i]}`)
+        //     document.body.appendChild(foodListItem)
+            console.log(result.data)
+        }
+    )
+    InputDeviceInfo.textContent = ''
+}
+
+let foodButton = document.querySelector('button')
+foodButton.addEventListener('click', createFood)
