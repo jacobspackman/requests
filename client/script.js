@@ -55,7 +55,7 @@ const sayHello = () => {
 }
 // DO NOT EDIT FUNCTION
 
-// CODE HERE
+sayHelloButton.addEventListener("click", sayHello)
 
 
 // PROBLEM 5 
@@ -70,7 +70,15 @@ const sayHello = () => {
 */ 
 
 const ohMy = () => {
-    // YOUR CODE HERE
+    axios.get('http://localhost:3000/animals').then(result => {
+        for (let i=0; i<result.data.length; i++){
+            let newP = document.createElement('p')
+            newP.textContent = `${result.data[i]}`
+            document.body.appendChild(newP)
+            console.log(result[i])
+        }
+        console.log(result.data)
+    })
 }
 
 document.getElementById('animals-button').addEventListener('click', ohMy)
@@ -87,11 +95,16 @@ document.getElementById('animals-button').addEventListener('click', ohMy)
     Outside of the function, select the button with the id "repeat-button" and add a click event listener that calls the repeatMyParam function.
     
     We'll be updating this function in the next problem.
-*/
+    */
+    let repeatButton = document.querySelector('#repeat-button')
+    let repeatText = document.querySelector('#repeat-text')
 
 const repeatMyParam = () => {
-    //YOUR CODE HERE
+    axios.get('http://localhost:3000/repeat/animals').then(result => console.log(result.data).catch(error => console.log(error)))
+    repeatText.textContent = `${result.data}`
+    repeatText.style.display = 'block'
 }
+repeatButton.addEventListener('click', repeatMyParam)
 
 // PROBLEM 7
 /*
@@ -115,7 +128,12 @@ const repeatMyParam = () => {
     Outside of your new function, select the button with the id "query-button" and add a click event listener that calls your function.
 */
 
-// CODE HERE
+let queryButton = document.querySelector('#query-button')
+
+const queryTest = () => {
+    axios.get('http://localhost:3000/query-test?name=jacob').then(result => console.log(result.data))
+}
+queryButton.addEventListener('click', queryTest)
 
 
 
